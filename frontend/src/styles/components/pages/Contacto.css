@@ -1,14 +1,21 @@
 form{
     padding: 5px;
-    padding-bottom: 2,5;
+    padding-bottom: 2em;
     padding-top: 2.5em;
     border: rgb(68, 63, 63) 1px solid;
     border-radius: 2%;
     margin: auto;
     width: 400px;
     text-align: center;
-    height: 30em;
+    height: auto;
     vertical-align: middle;
+}
+.botoncito{
+    background-color: yellow;
+    color: black;
+    width: 8em;
+    border: 0em;
+    height: 3em;
 }
 .jeje{
     padding: 0.8em;
@@ -22,4 +29,8 @@ select{
     width: 14em; 
     height: 20px; 
     text-align: center
+}
+.botoncito:hover{
+    background-color: white;
+    cursor: pointer;
 }

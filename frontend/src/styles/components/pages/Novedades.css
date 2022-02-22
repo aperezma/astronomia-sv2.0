@@ -1,0 +1,26 @@
+th{
+    color: aliceblue;
+}
+td{
+    color:aliceblue;
+}
+
+.titulo{
+    text-align: center;
+    color: yellow;
+    border-bottom: 0.1em solid grey;
+}
+.main{
+    padding: 0.5em;
+    border: rgb(68, 63, 63) 1px solid;
+    border-radius: 2%;
+    width: 75%;
+    margin: auto;
+    text-align: justify;
+    background-color: black;
+    color: aliceblue;
+    padding-top: 4em;
+    padding-bottom: 4em;
+    height: auto;
+    margin-left: auto;
+}

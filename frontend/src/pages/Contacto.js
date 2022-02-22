@@ -1,5 +1,40 @@
 import '../styles/components/pages/Contacto.css'
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+
 const ContactoPage = (props) => {
+
+    const initialForm = {
+		nombre: '',
+		email: '',
+        telefono: '',
+		mensaje: ''
+	}
+	const [sending, setSending] = useState(false);
+	const [msg, setMsg] = useState('');
+	const [formData, setFormData] = useState(initialForm);
+
+	const handleChange = e => {
+		const { name, value } = e.target;
+		setFormData(oldData => ({
+			...oldData,
+			[name]: value
+		}));
+	}
+
+	const handleSubmit = async e => {
+		e.preventDefault();
+		setMsg('');
+		setSending(true)
+		const response = await
+			axios.post(`http://localhost:3000/api/contacto`, formData);
+		setSending(false);
+		setMsg(response.data.message);
+		if (response.data.error === false) {
+			setFormData(initialForm)
+		}
+	}
+
     return (
         <section className="all">
 
@@ -11,32 +46,27 @@ const ContactoPage = (props) => {
             <br />
             <br />
             <br />
-            <form action="">
-                <label for="nombre">Ingrese su nombre</label><br/> 
-                <input type="text" id="escrito"/><br/>
+            <form action="/contacto" method="post" onSubmit={handleSubmit}>
+                <label for="nombre">Nombre:  </label>
+                <input type="text" id="escrito" name="nombre" onChange={handleChange} value={formData.nombre}/><br/>
                 <br />
-                <label for="email" >Ingrese su email</label><br />
-                <input type="email" name="email" id="escrito"/><br/>
+                <br />
+                <label for="email" >Email: </label>
+                <input type="email" name="email" id="escrito" onChange={handleChange} value={formData.email}/><br/>
                 <br/>
-                <label for="pronombres">Ingrese sus pronombres por favor</label>
                 <br/>
-                <select name="pronombres">
-                   <option value="0">  </option> 
-                   <option value="1">El</option> 
-                   <option value="2">Ella</option> 
-                   <option value="3">Elle</option>
-                   <option value="10">Ninguno</option> 
-                   <option value="11">Todos</option> 
-                   <option value="12">Prefiero no decir</option> 
-                </select><br/>
+                <label for="texto">Escriba aqui su mensaje</label><br/>
                 <br/>
-                <label for="texto">Escriba aqui lo que desee enviar</label><br/>
-                <textarea name="texto" rows="10" cols="40"></textarea><br/>
+                <textarea name="mensaje" rows="10" cols="40" onChange={handleChange} value={formData.mensaje}></textarea><br/>
                 <br/>
-                <input type="submit" value="¡Enviar!"/>
+                <br/>
+                <br/>
+                <input type="submit" value="¡Enviar!" className="botoncito" />
             </form>
             <br/>
             <br/>
+            {sending ? <p>Enviando...</p> : null}
+                    {msg ? <p>{msg}</p> : null}
         </div>
        
     </section>
